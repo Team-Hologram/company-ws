@@ -92,7 +92,7 @@ export default function Home() {
           <div className="container-wide relative z-10 text-center pt-24">
             <FadeIn delay={0.2} duration={0.8}>
               <span className="text-caption mb-6 inline-block">
-                Premium Technology Studio
+                
               </span>
             </FadeIn>
 
