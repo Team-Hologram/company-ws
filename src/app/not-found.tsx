@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 export default function NotFound() {
     return (
         <>
+            <Header />
             <main className="min-h-screen flex items-center justify-center relative">
                 {/* Background */}
                 <div className="absolute inset-0 gradient-mesh opacity-30" />
@@ -43,6 +44,7 @@ export default function NotFound() {
                     </div>
                 </div>
             </main>
+            <Footer />
         </>
     );
 }
