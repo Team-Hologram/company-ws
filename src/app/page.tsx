@@ -92,12 +92,12 @@ export default function Home() {
           <div className="container-wide relative z-10 text-center pt-24">
             <FadeIn delay={0.2} duration={0.8}>
               <span className="text-caption mb-6 inline-block">
-                
+                Premium Technology Studio
               </span>
             </FadeIn>
 
             <FadeIn delay={0.4} duration={1}>
-              <h1 className="text-display max-w-5xl mx-auto mb-8">
+              <h1 className="text-display max-w-6xl mx-auto mb-8">
                 Crafting the Future of Technology
               </h1>
             </FadeIn>
