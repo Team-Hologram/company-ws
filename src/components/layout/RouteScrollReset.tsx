@@ -1,12 +1,10 @@
 "use client";
 
 import { useEffect, useLayoutEffect } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function RouteScrollReset() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const query = searchParams.toString();
 
   useEffect(() => {
     if ("scrollRestoration" in window.history) {
@@ -15,7 +13,6 @@ export default function RouteScrollReset() {
         window.history.scrollRestoration = "auto";
       };
     }
-    return;
   }, []);
 
   useLayoutEffect(() => {
@@ -24,9 +21,9 @@ export default function RouteScrollReset() {
     const prevHtmlBehavior = html.style.scrollBehavior;
     const prevBodyBehavior = body.style.scrollBehavior;
 
-    // Force an instant reset before the new route paints.
     html.style.scrollBehavior = "auto";
     body.style.scrollBehavior = "auto";
+
     html.scrollTop = 0;
     body.scrollTop = 0;
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
@@ -41,7 +38,7 @@ export default function RouteScrollReset() {
       html.style.scrollBehavior = prevHtmlBehavior;
       body.style.scrollBehavior = prevBodyBehavior;
     };
-  }, [pathname, query]);
+  }, [pathname]);
 
   return null;
 }
