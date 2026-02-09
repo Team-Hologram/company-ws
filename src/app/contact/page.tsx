@@ -11,6 +11,7 @@ type FormStatus = "idle" | "submitting" | "success" | "error";
 
 export default function ContactPage() {
     const [formStatus, setFormStatus] = useState<FormStatus>("idle");
+    const [errorMessage, setErrorMessage] = useState("");
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -22,10 +23,34 @@ export default function ContactPage() {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         setFormStatus("submitting");
+        setErrorMessage("");
 
-        // Simulate form submission
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        setFormStatus("success");
+        try {
+            const response = await fetch("/api/contact", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (!response.ok) {
+                const body = (await response.json().catch(() => null)) as { error?: string } | null;
+                throw new Error(body?.error || "Failed to send message. Please try again.");
+            }
+
+            setFormStatus("success");
+            setFormData({
+                name: "",
+                email: "",
+                company: "",
+                budget: "",
+                message: "",
+            });
+        } catch (error) {
+            setFormStatus("error");
+            setErrorMessage(error instanceof Error ? error.message : "Something went wrong.");
+        }
     };
 
     const inputClasses = `
@@ -193,6 +218,10 @@ export default function ContactPage() {
                                                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                                                 />
                                             </div>
+
+                                            {formStatus === "error" && (
+                                                <p className="text-red-400 text-sm">{errorMessage}</p>
+                                            )}
 
                                             <Button
                                                 type="submit"
