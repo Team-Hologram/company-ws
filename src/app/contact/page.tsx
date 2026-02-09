@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import FadeIn from "@/components/motion/FadeIn";
@@ -232,7 +233,11 @@ export default function ContactPage() {
                                             </Button>
 
                                             <p className="text-smoke text-xs text-center">
-                                                By submitting, you agree to our Privacy Policy.
+                                                By submitting, you agree to our {" "}
+                                                <Link href="/privacy" className="underline hover:text-pure-white transition-colors">
+                                                    Privacy Policy
+                                                </Link>
+                                                .
                                             </p>
                                         </form>
                                     )}
